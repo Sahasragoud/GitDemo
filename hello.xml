@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<company>
+    <department name="Engineering">
+        <employee id="101">
+            <name>Sahasra Muthyala</name>
+            <role>Software Engineer</role>
+            <skills>
+                <skill>Git</skill>
+                <skill>Python</skill>
+            </skills>
+        </employee>
+        <employee id="102">
+            <name>Jane Doe</name>
+            <role>DevOps Specialist</role>
+            <skills>
+                <skill>Docker</skill>
+                <skill>CI/CD</skill>
+            </skills>
+        </employee>
+    </department>
+</company>
