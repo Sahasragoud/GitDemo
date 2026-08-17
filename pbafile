@@ -1,3 +1,763 @@
+Started by user Sahasra Admin
+
+Obtained RIDEHUB USER AUTHENTICATION/Jenkinsfile from git https://github.com/Sahasragoud/ridehub-application.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins
+ in /var/lib/jenkins/workspace/ridehub-auth-service
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/ridehub-auth-service/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/Sahasragoud/ridehub-application.git # timeout=10
+Fetching upstream changes from https://github.com/Sahasragoud/ridehub-application.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.34.1'
+ > git fetch --tags --force --progress -- https://github.com/Sahasragoud/ridehub-application.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 10a6c15e07fa1c83c43d5733aa64ed7049fd7956 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 10a6c15e07fa1c83c43d5733aa64ed7049fd7956 # timeout=10
+Commit message: "added docker setting to jenkins"
+ > git rev-list --no-walk 6f55c49438c635fb06e5600420c1deff27e611a3 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/ridehub-auth-service/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/Sahasragoud/ridehub-application.git # timeout=10
+Fetching upstream changes from https://github.com/Sahasragoud/ridehub-application.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.34.1'
+ > git fetch --tags --force --progress -- https://github.com/Sahasragoud/ridehub-application.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 10a6c15e07fa1c83c43d5733aa64ed7049fd7956 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 10a6c15e07fa1c83c43d5733aa64ed7049fd7956 # timeout=10
+Commit message: "added docker setting to jenkins"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Verify Environment)
+[Pipeline] sh
++ java -version
+openjdk version "21.0.11" 2026-04-21
+OpenJDK Runtime Environment (build 21.0.11+10-1-22.04.2-Ubuntu)
+OpenJDK 64-Bit Server VM (build 21.0.11+10-1-22.04.2-Ubuntu, mixed mode, sharing)
+[Pipeline] sh
++ mvn -version
+[1mApache Maven 3.6.3[m
+Maven home: /usr/share/maven
+Java version: 21.0.11, vendor: Ubuntu, runtime: /usr/lib/jvm/java-21-openjdk-amd64
+Default locale: en_IN, platform encoding: UTF-8
+OS name: "linux", version: "6.8.0-101-generic", arch: "amd64", family: "unix"
+[Pipeline] sh
++ docker --version
+Docker version 29.1.3, build 29.1.3-0ubuntu3~22.04.2
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] dir
+Running in /var/lib/jenkins/workspace/ridehub-auth-service/RIDEHUB USER AUTHENTICATION
+[Pipeline] {
+[Pipeline] withCredentials
+Masking supported pattern matches of $DB_URL or $DB_PASSWORD
+[Pipeline] {
+[Pipeline] sh
++ mvn clean test
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m----------------------< [0;36mcom.rideHub:authService[0;1m >-----------------------[m
+[[1;34mINFO[m] [1mBuilding RideHub Platform 0.0.1-SNAPSHOT[m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-clean-plugin:3.3.2:clean[m [1m(default-clean)[m @ [36mauthService[0;1m ---[m
+[[1;34mINFO[m] Deleting /var/lib/jenkins/workspace/ridehub-auth-service/RIDEHUB USER AUTHENTICATION/target
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:resources[m [1m(default-resources)[m @ [36mauthService[0;1m ---[m
+[[1;34mINFO[m] Copying 1 resource from src/main/resources to target/classes
+[[1;34mINFO[m] Copying 0 resource from src/main/resources to target/classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.13.0:compile[m [1m(default-compile)[m @ [36mauthService[0;1m ---[m
+[[1;34mINFO[m] Recompiling the module because of [1mchanged source code[m.
+[[1;34mINFO[m] Compiling 29 source files with javac [debug parameters release 17] to target/classes
+[[1;34mINFO[m] Annotation processing is enabled because one or more processors were found
+  on the class path. A future release of javac may disable annotation processing
+  unless at least one processor is specified by name (-processor), or a search
+  path is specified (--processor-path, --processor-module-path), or annotation
+  processing is enabled explicitly (-proc:only, -proc:full).
+  Use -Xlint:-options to suppress this message.
+  Use -proc:none to disable annotation processing.
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:testResources[m [1m(default-testResources)[m @ [36mauthService[0;1m ---[m
+[[1;34mINFO[m] skip non existing resourceDirectory /var/lib/jenkins/workspace/ridehub-auth-service/RIDEHUB USER AUTHENTICATION/src/test/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.13.0:testCompile[m [1m(default-testCompile)[m @ [36mauthService[0;1m ---[m
+[[1;34mINFO[m] Recompiling the module because of [1mchanged dependency[m.
+[[1;34mINFO[m] Compiling 3 source files with javac [debug parameters release 17] to target/test-classes
+[[1;34mINFO[m] Annotation processing is enabled because one or more processors were found
+  on the class path. A future release of javac may disable annotation processing
+  unless at least one processor is specified by name (-processor), or a search
+  path is specified (--processor-path, --processor-module-path), or annotation
+  processing is enabled explicitly (-proc:only, -proc:full).
+  Use -Xlint:-options to suppress this message.
+  Use -proc:none to disable annotation processing.
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-surefire-plugin:3.2.5:test[m [1m(default-test)[m @ [36mauthService[0;1m ---[m
+[[1;34mINFO[m] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[[1;34mINFO[m] 
+[[1;34mINFO[m] -------------------------------------------------------
+[[1;34mINFO[m]  T E S T S
+[[1;34mINFO[m] -------------------------------------------------------
+[[1;34mINFO[m] Running com.rideHub.authService.[1mPlatformApplicationTests[m
+23:40:18.670 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.rideHub.authService.PlatformApplicationTests]: PlatformApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+23:40:19.326 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.rideHub.authService.PlatformApplication for test class com.rideHub.authService.PlatformApplicationTests
+23:40:20.156 [main] INFO org.springframework.boot.devtools.restart.RestartApplicationListener -- Restart disabled due to context in which it is running
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.0)
+
+2026-08-17T23:40:34.739+05:30  INFO 7997 --- [user-authentication] [           main] c.r.a.PlatformApplicationTests           : Starting PlatformApplicationTests using Java 21.0.11 with PID 7997 (started by jenkins in /var/lib/jenkins/workspace/ridehub-auth-service/RIDEHUB USER AUTHENTICATION)
+2026-08-17T23:40:34.747+05:30  INFO 7997 --- [user-authentication] [           main] c.r.a.PlatformApplicationTests           : No active profile set, falling back to 1 default profile: "default"
+2026-08-17T23:40:44.655+05:30  INFO 7997 --- [user-authentication] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-08-17T23:40:45.076+05:30  INFO 7997 --- [user-authentication] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 390 ms. Found 1 JPA repository interface.
+2026-08-17T23:40:46.742+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : Driver class org.postgresql.Driver found in Thread context class loader jdk.internal.loader.ClassLoaders$AppClassLoader@639fee48
+2026-08-17T23:40:47.608+05:30  INFO 7997 --- [user-authentication] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-08-17T23:40:48.344+05:30  INFO 7997 --- [user-authentication] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-08-17T23:40:48.586+05:30  INFO 7997 --- [user-authentication] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-08-17T23:40:50.563+05:30  INFO 7997 --- [user-authentication] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-08-17T23:40:50.664+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : HikariPool-1 - configuration:
+2026-08-17T23:40:50.686+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : allowPoolSuspension.............false
+2026-08-17T23:40:50.686+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : autoCommit......................true
+2026-08-17T23:40:50.690+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : catalog.........................none
+2026-08-17T23:40:50.693+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : connectionInitSql...............none
+2026-08-17T23:40:50.701+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : connectionTestQuery.............none
+2026-08-17T23:40:50.714+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : connectionTimeout...............30000
+2026-08-17T23:40:50.714+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : dataSource......................none
+2026-08-17T23:40:50.714+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : dataSourceClassName.............none
+2026-08-17T23:40:50.715+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : dataSourceJNDI..................none
+2026-08-17T23:40:50.715+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : dataSourceProperties............{password=<masked>}
+2026-08-17T23:40:50.715+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : driverClassName................."org.postgresql.Driver"
+2026-08-17T23:40:50.716+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : exceptionOverrideClassName......none
+2026-08-17T23:40:50.716+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : healthCheckProperties...........{}
+2026-08-17T23:40:50.716+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : healthCheckRegistry.............none
+2026-08-17T23:40:50.716+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : idleTimeout.....................600000
+2026-08-17T23:40:50.716+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : initializationFailTimeout.......1
+2026-08-17T23:40:50.716+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : isolateInternalQueries..........false
+2026-08-17T23:40:50.719+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : jdbcUrl.........................****
+2026-08-17T23:40:50.723+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : keepaliveTime...................0
+2026-08-17T23:40:50.725+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : leakDetectionThreshold..........0
+2026-08-17T23:40:50.731+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : maxLifetime.....................1800000
+2026-08-17T23:40:50.732+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : maximumPoolSize.................10
+2026-08-17T23:40:50.733+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : metricRegistry..................none
+2026-08-17T23:40:50.733+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : metricsTrackerFactory...........none
+2026-08-17T23:40:50.733+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : minimumIdle.....................10
+2026-08-17T23:40:50.737+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : password........................<masked>
+2026-08-17T23:40:50.739+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : poolName........................"HikariPool-1"
+2026-08-17T23:40:50.747+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : readOnly........................false
+2026-08-17T23:40:50.751+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : registerMbeans..................false
+2026-08-17T23:40:50.752+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : scheduledExecutor...............none
+2026-08-17T23:40:50.752+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : schema..........................none
+2026-08-17T23:40:50.753+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : threadFactory...................internal
+2026-08-17T23:40:50.754+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : transactionIsolation............default
+2026-08-17T23:40:50.758+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : username........................"postgres"
+2026-08-17T23:40:50.759+05:30 DEBUG 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariConfig           : validationTimeout...............5000
+2026-08-17T23:40:50.759+05:30  INFO 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-08-17T23:40:50.895+05:30 DEBUG 7997 --- [user-authentication] [           main] org.postgresql.Driver                    : Loading driver configuration via classloader jdk.internal.loader.ClassLoaders$AppClassLoader@639fee48
+2026-08-17T23:40:50.899+05:30 DEBUG 7997 --- [user-authentication] [           main] org.postgresql.Driver                    : Connecting with URL: ****
+2026-08-17T23:40:50.963+05:30 DEBUG 7997 --- [user-authentication] [           main] org.postgresql.jdbc.PgConnection         : PostgreSQL JDBC Driver 42.7.3
+2026-08-17T23:40:50.986+05:30 DEBUG 7997 --- [user-authentication] [           main] org.postgresql.jdbc.PgConnection         :   setDefaultFetchSize = 0
+2026-08-17T23:40:50.986+05:30 DEBUG 7997 --- [user-authentication] [           main] org.postgresql.jdbc.PgConnection         :   setPrepareThreshold = 5
+2026-08-17T23:40:51.012+05:30 DEBUG 7997 --- [user-authentication] [           main] o.p.core.v3.ConnectionFactoryImpl        : Trying to establish a protocol version 3 connection to 192.168.117.1:5432
+2026-08-17T23:40:51.102+05:30 DEBUG 7997 --- [user-authentication] [           main] o.p.core.v3.ConnectionFactoryImpl        : Receive Buffer Size is 65,536
+2026-08-17T23:40:51.105+05:30 DEBUG 7997 --- [user-authentication] [           main] o.p.core.v3.ConnectionFactoryImpl        : Send Buffer Size is 43,520
+2026-08-17T23:40:51.887+05:30  INFO 7997 --- [user-authentication] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@216328b2
+2026-08-17T23:40:51.896+05:30  INFO 7997 --- [user-authentication] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-08-17T23:40:52.024+05:30 DEBUG 7997 --- [user-authentication] [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Pool stats (total=1, active=1, idle=0, waiting=0)
+2026-08-17T23:40:52.061+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.Driver                    : Connecting with URL: ****
+2026-08-17T23:40:52.062+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.jdbc.PgConnection         : PostgreSQL JDBC Driver 42.7.3
+2026-08-17T23:40:52.062+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.jdbc.PgConnection         :   setDefaultFetchSize = 0
+2026-08-17T23:40:52.067+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.jdbc.PgConnection         :   setPrepareThreshold = 5
+2026-08-17T23:40:52.069+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] o.p.core.v3.ConnectionFactoryImpl        : Trying to establish a protocol version 3 connection to 192.168.117.1:5432
+2026-08-17T23:40:52.073+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] o.p.core.v3.ConnectionFactoryImpl        : Receive Buffer Size is 65,536
+2026-08-17T23:40:52.073+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] o.p.core.v3.ConnectionFactoryImpl        : Send Buffer Size is 43,520
+2026-08-17T23:40:52.285+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2c7f9982
+2026-08-17T23:40:52.318+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - After adding stats (total=2, active=1, idle=1, waiting=0)
+2026-08-17T23:40:52.322+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.Driver                    : Connecting with URL: ****
+2026-08-17T23:40:52.324+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.jdbc.PgConnection         : PostgreSQL JDBC Driver 42.7.3
+2026-08-17T23:40:52.326+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.jdbc.PgConnection         :   setDefaultFetchSize = 0
+2026-08-17T23:40:52.326+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.jdbc.PgConnection         :   setPrepareThreshold = 5
+2026-08-17T23:40:52.330+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] o.p.core.v3.ConnectionFactoryImpl        : Trying to establish a protocol version 3 connection to 192.168.117.1:5432
+2026-08-17T23:40:52.336+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] o.p.core.v3.ConnectionFactoryImpl        : Receive Buffer Size is 65,536
+2026-08-17T23:40:52.336+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] o.p.core.v3.ConnectionFactoryImpl        : Send Buffer Size is 43,520
+2026-08-17T23:40:52.506+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2687f2f2
+2026-08-17T23:40:52.537+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - After adding stats (total=3, active=0, idle=3, waiting=0)
+2026-08-17T23:40:52.539+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.Driver                    : Connecting with URL: ****
+2026-08-17T23:40:52.540+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.jdbc.PgConnection         : PostgreSQL JDBC Driver 42.7.3
+2026-08-17T23:40:52.540+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.jdbc.PgConnection         :   setDefaultFetchSize = 0
+2026-08-17T23:40:52.540+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.jdbc.PgConnection         :   setPrepareThreshold = 5
+2026-08-17T23:40:52.543+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] o.p.core.v3.ConnectionFactoryImpl        : Trying to establish a protocol version 3 connection to 192.168.117.1:5432
+2026-08-17T23:40:52.552+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] o.p.core.v3.ConnectionFactoryImpl        : Receive Buffer Size is 65,536
+2026-08-17T23:40:52.552+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] o.p.core.v3.ConnectionFactoryImpl        : Send Buffer Size is 43,520
+2026-08-17T23:40:52.886+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@63857846
+2026-08-17T23:40:53.174+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - After adding stats (total=4, active=0, idle=4, waiting=0)
+2026-08-17T23:40:53.175+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.Driver                    : Connecting with URL: ****
+2026-08-17T23:40:53.176+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.jdbc.PgConnection         : PostgreSQL JDBC Driver 42.7.3
+2026-08-17T23:40:53.176+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.jdbc.PgConnection         :   setDefaultFetchSize = 0
+2026-08-17T23:40:53.176+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.jdbc.PgConnection         :   setPrepareThreshold = 5
+2026-08-17T23:40:53.176+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] o.p.core.v3.ConnectionFactoryImpl        : Trying to establish a protocol version 3 connection to 192.168.117.1:5432
+2026-08-17T23:40:53.180+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] o.p.core.v3.ConnectionFactoryImpl        : Receive Buffer Size is 65,536
+2026-08-17T23:40:53.180+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] o.p.core.v3.ConnectionFactoryImpl        : Send Buffer Size is 43,520
+2026-08-17T23:40:53.458+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@33664e3d
+2026-08-17T23:40:53.497+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - After adding stats (total=5, active=0, idle=5, waiting=0)
+2026-08-17T23:40:53.502+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.Driver                    : Connecting with URL: ****
+2026-08-17T23:40:53.511+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.jdbc.PgConnection         : PostgreSQL JDBC Driver 42.7.3
+2026-08-17T23:40:53.511+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.jdbc.PgConnection         :   setDefaultFetchSize = 0
+2026-08-17T23:40:53.511+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.jdbc.PgConnection         :   setPrepareThreshold = 5
+2026-08-17T23:40:53.511+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] o.p.core.v3.ConnectionFactoryImpl        : Trying to establish a protocol version 3 connection to 192.168.117.1:5432
+2026-08-17T23:40:53.517+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] o.p.core.v3.ConnectionFactoryImpl        : Receive Buffer Size is 65,536
+2026-08-17T23:40:53.522+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] o.p.core.v3.ConnectionFactoryImpl        : Send Buffer Size is 43,520
+2026-08-17T23:40:53.773+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@52acf9b6
+2026-08-17T23:40:53.808+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - After adding stats (total=6, active=0, idle=6, waiting=0)
+2026-08-17T23:40:53.825+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.Driver                    : Connecting with URL: ****
+2026-08-17T23:40:53.928+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.jdbc.PgConnection         : PostgreSQL JDBC Driver 42.7.3
+2026-08-17T23:40:54.067+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.jdbc.PgConnection         :   setDefaultFetchSize = 0
+2026-08-17T23:40:54.068+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.jdbc.PgConnection         :   setPrepareThreshold = 5
+2026-08-17T23:40:54.069+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] o.p.core.v3.ConnectionFactoryImpl        : Trying to establish a protocol version 3 connection to 192.168.117.1:5432
+2026-08-17T23:40:54.121+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] o.p.core.v3.ConnectionFactoryImpl        : Receive Buffer Size is 65,536
+2026-08-17T23:40:54.123+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] o.p.core.v3.ConnectionFactoryImpl        : Send Buffer Size is 43,520
+2026-08-17T23:40:54.546+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4ba59173
+2026-08-17T23:40:54.594+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - After adding stats (total=7, active=0, idle=7, waiting=0)
+2026-08-17T23:40:54.595+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.Driver                    : Connecting with URL: ****
+2026-08-17T23:40:54.595+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.jdbc.PgConnection         : PostgreSQL JDBC Driver 42.7.3
+2026-08-17T23:40:54.595+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.jdbc.PgConnection         :   setDefaultFetchSize = 0
+2026-08-17T23:40:54.596+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.jdbc.PgConnection         :   setPrepareThreshold = 5
+2026-08-17T23:40:54.600+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] o.p.core.v3.ConnectionFactoryImpl        : Trying to establish a protocol version 3 connection to 192.168.117.1:5432
+2026-08-17T23:40:54.615+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] o.p.core.v3.ConnectionFactoryImpl        : Receive Buffer Size is 65,536
+2026-08-17T23:40:54.616+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] o.p.core.v3.ConnectionFactoryImpl        : Send Buffer Size is 43,520
+2026-08-17T23:40:55.233+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3aa8709
+2026-08-17T23:40:55.297+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - After adding stats (total=8, active=0, idle=8, waiting=0)
+2026-08-17T23:40:55.300+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.Driver                    : Connecting with URL: ****
+2026-08-17T23:40:55.300+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.jdbc.PgConnection         : PostgreSQL JDBC Driver 42.7.3
+2026-08-17T23:40:55.301+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.jdbc.PgConnection         :   setDefaultFetchSize = 0
+2026-08-17T23:40:55.301+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.jdbc.PgConnection         :   setPrepareThreshold = 5
+2026-08-17T23:40:55.301+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] o.p.core.v3.ConnectionFactoryImpl        : Trying to establish a protocol version 3 connection to 192.168.117.1:5432
+2026-08-17T23:40:55.306+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] o.p.core.v3.ConnectionFactoryImpl        : Receive Buffer Size is 65,536
+2026-08-17T23:40:55.306+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] o.p.core.v3.ConnectionFactoryImpl        : Send Buffer Size is 43,520
+2026-08-17T23:40:55.736+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2bc26e7
+2026-08-17T23:40:55.781+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - After adding stats (total=9, active=0, idle=9, waiting=0)
+2026-08-17T23:40:55.800+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.Driver                    : Connecting with URL: ****
+2026-08-17T23:40:55.850+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.jdbc.PgConnection         : PostgreSQL JDBC Driver 42.7.3
+2026-08-17T23:40:55.851+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.jdbc.PgConnection         :   setDefaultFetchSize = 0
+2026-08-17T23:40:55.851+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] org.postgresql.jdbc.PgConnection         :   setPrepareThreshold = 5
+2026-08-17T23:40:55.869+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] o.p.core.v3.ConnectionFactoryImpl        : Trying to establish a protocol version 3 connection to 192.168.117.1:5432
+2026-08-17T23:40:55.878+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] o.p.core.v3.ConnectionFactoryImpl        : Receive Buffer Size is 65,536
+2026-08-17T23:40:55.878+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] o.p.core.v3.ConnectionFactoryImpl        : Send Buffer Size is 43,520
+2026-08-17T23:40:56.219+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@37681e4f
+2026-08-17T23:40:56.260+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - After adding stats (total=10, active=0, idle=10, waiting=0)
+2026-08-17T23:40:56.260+05:30 DEBUG 7997 --- [user-authentication] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Connection not added, stats (total=10, active=0, idle=10, waiting=0)
+2026-08-17T23:41:01.231+05:30  INFO 7997 --- [user-authentication] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-08-17T23:41:01.289+05:30 DEBUG 7997 --- [user-authentication] [           main] org.hibernate.SQL                        : 
+    drop table if exists users cascade
+Hibernate: 
+    drop table if exists users cascade
+2026-08-17T23:41:01.299+05:30  WARN 7997 --- [user-authentication] [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2026-08-17T23:41:01.299+05:30  WARN 7997 --- [user-authentication] [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "users" does not exist, skipping
+2026-08-17T23:41:01.322+05:30 DEBUG 7997 --- [user-authentication] [           main] org.hibernate.SQL                        : 
+    create table users (
+        created_at timestamp(6) not null,
+        id bigint generated by default as identity,
+        updated_at timestamp(6) not null,
+        phone varchar(10) not null,
+        email varchar(255) not null unique,
+        full_name varchar(255) not null,
+        password varchar(255) not null,
+        role varchar(255) not null check (role in ('USER','DRIVER','ADMIN')),
+        primary key (id)
+    )
+Hibernate: 
+    create table users (
+        created_at timestamp(6) not null,
+        id bigint generated by default as identity,
+        updated_at timestamp(6) not null,
+        phone varchar(10) not null,
+        email varchar(255) not null unique,
+        full_name varchar(255) not null,
+        password varchar(255) not null,
+        role varchar(255) not null check (role in ('USER','DRIVER','ADMIN')),
+        primary key (id)
+    )
+2026-08-17T23:41:01.367+05:30  INFO 7997 --- [user-authentication] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-08-17T23:41:03.290+05:30  INFO 7997 --- [user-authentication] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2026-08-17T23:41:07.298+05:30  INFO 7997 --- [user-authentication] [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@57fe6f2d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6e43c01f, org.springframework.security.web.context.SecurityContextHolderFilter@6db64abf, org.springframework.security.web.header.HeaderWriterFilter@7eb006bd, org.springframework.web.filter.CorsFilter@6567de86, com.rideHub.authService.security.filter.JwtAuthenticationFilter@31dbca5d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@49a0fe14, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5350a926, org.springframework.security.web.session.SessionManagementFilter@4dd28982, org.springframework.security.web.access.ExceptionTranslationFilter@3393aa46, org.springframework.security.web.access.intercept.AuthorizationFilter@470fc16c]
+2026-08-17T23:41:10.437+05:30  INFO 7997 --- [user-authentication] [           main] o.a.k.clients.admin.AdminClientConfig    : AdminClientConfig values: 
+	auto.include.jmx.reporter = true
+	bootstrap.controllers = []
+	bootstrap.servers = [localhost:9092]
+	client.dns.lookup = use_all_dns_ips
+	client.id = user-authentication-admin-0
+	connections.max.idle.ms = 300000
+	default.api.timeout.ms = 60000
+	enable.metrics.push = true
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retries = 2147483647
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+
+2026-08-17T23:41:11.518+05:30  INFO 7997 --- [user-authentication] [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 3.7.0
+2026-08-17T23:41:11.521+05:30  INFO 7997 --- [user-authentication] [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: 2ae524ed625438c5
+2026-08-17T23:41:11.521+05:30  INFO 7997 --- [user-authentication] [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1786990271511
+2026-08-17T23:41:11.710+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:11.712+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:11.822+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:11.822+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:11.925+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:11.926+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:12.229+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:12.232+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:12.638+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:12.638+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:13.351+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:13.351+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:14.267+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:14.273+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:15.190+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:15.191+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:16.220+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:16.221+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:17.255+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:17.256+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:18.274+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:18.275+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:19.290+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:19.290+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:20.299+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:20.300+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:21.345+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:21.345+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:22.034+05:30 DEBUG 7997 --- [user-authentication] [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2026-08-17T23:41:22.038+05:30 DEBUG 7997 --- [user-authentication] [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-08-17T23:41:22.357+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:22.357+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:23.393+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:23.394+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:24.411+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:24.411+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:25.326+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:25.326+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:26.337+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:26.338+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:27.354+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:27.354+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:28.371+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:28.377+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:29.390+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:29.390+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:30.401+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:30.401+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:31.320+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:31.320+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:32.331+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:32.332+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:33.364+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:33.365+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:34.381+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:34.381+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:35.407+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:35.407+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:36.325+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:36.325+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:37.345+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:37.345+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:38.366+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:38.366+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:39.381+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:39.381+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:40.454+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:40.455+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:41.460+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:41.461+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:41.663+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] o.a.k.c.a.i.AdminMetadataManager         : [AdminClient clientId=user-authentication-admin-0] Metadata update failed
+
+org.apache.kafka.common.errors.TimeoutException: Timed out waiting for a node assignment. Call: fetchMetadata
+
+2026-08-17T23:41:41.662+05:30 ERROR 7997 --- [user-authentication] [           main] o.springframework.kafka.core.KafkaAdmin  : Could not configure topics
+
+org.springframework.kafka.KafkaException: Timed out waiting to get existing topics
+	at org.springframework.kafka.core.KafkaAdmin.lambda$checkPartitions$13(KafkaAdmin.java:539) ~[spring-kafka-3.2.0.jar:3.2.0]
+	at java.base/java.util.HashMap.forEach(HashMap.java:1429) ~[na:na]
+	at org.springframework.kafka.core.KafkaAdmin.checkPartitions(KafkaAdmin.java:518) ~[spring-kafka-3.2.0.jar:3.2.0]
+	at org.springframework.kafka.core.KafkaAdmin.addOrModifyTopicsIfNeeded(KafkaAdmin.java:411) ~[spring-kafka-3.2.0.jar:3.2.0]
+	at org.springframework.kafka.core.KafkaAdmin.initialize(KafkaAdmin.java:263) ~[spring-kafka-3.2.0.jar:3.2.0]
+	at org.springframework.kafka.core.KafkaAdmin.afterSingletonsInstantiated(KafkaAdmin.java:227) ~[spring-kafka-3.2.0.jar:3.2.0]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:986) ~[spring-beans-6.1.8.jar:6.1.8]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:962) ~[spring-context-6.1.8.jar:6.1.8]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624) ~[spring-context-6.1.8.jar:6.1.8]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754) ~[spring-boot-3.3.0.jar:3.3.0]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456) ~[spring-boot-3.3.0.jar:3.3.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:335) ~[spring-boot-3.3.0.jar:3.3.0]
+	at org.springframework.boot.test.context.SpringBootContextLoader.lambda$loadContext$3(SpringBootContextLoader.java:137) ~[spring-boot-test-3.3.0.jar:3.3.0]
+	at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:58) ~[spring-core-6.1.8.jar:6.1.8]
+	at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:46) ~[spring-core-6.1.8.jar:6.1.8]
+	at org.springframework.boot.SpringApplication.withHook(SpringApplication.java:1463) ~[spring-boot-3.3.0.jar:3.3.0]
+	at org.springframework.boot.test.context.SpringBootContextLoader$ContextLoaderHook.run(SpringBootContextLoader.java:553) ~[spring-boot-test-3.3.0.jar:3.3.0]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:137) ~[spring-boot-test-3.3.0.jar:3.3.0]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:108) ~[spring-boot-test-3.3.0.jar:3.3.0]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:225) ~[spring-test-6.1.8.jar:6.1.8]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:152) ~[spring-test-6.1.8.jar:6.1.8]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:130) ~[spring-test-6.1.8.jar:6.1.8]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:191) ~[spring-test-6.1.8.jar:6.1.8]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:130) ~[spring-test-6.1.8.jar:6.1.8]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:260) ~[spring-test-6.1.8.jar:6.1.8]
+	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:163) ~[spring-test-6.1.8.jar:6.1.8]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$10(ClassBasedTestDescriptor.java:378) ~[junit-jupiter-engine-5.10.2.jar:5.10.2]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:383) ~[junit-jupiter-engine-5.10.2.jar:5.10.2]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$11(ClassBasedTestDescriptor.java:378) ~[junit-jupiter-engine-5.10.2.jar:5.10.2]
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197) ~[na:na]
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179) ~[na:na]
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1708) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[na:na]
+	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:310) ~[na:na]
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:735) ~[na:na]
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734) ~[na:na]
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762) ~[na:na]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:377) ~[junit-jupiter-engine-5.10.2.jar:5.10.2]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$instantiateAndPostProcessTestInstance$6(ClassBasedTestDescriptor.java:290) ~[junit-jupiter-engine-5.10.2.jar:5.10.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.2.jar:1.10.2]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:289) ~[junit-jupiter-engine-5.10.2.jar:5.10.2]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$4(ClassBasedTestDescriptor.java:279) ~[junit-jupiter-engine-5.10.2.jar:5.10.2]
+	at java.base/java.util.Optional.orElseGet(Optional.java:364) ~[na:na]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$5(ClassBasedTestDescriptor.java:278) ~[junit-jupiter-engine-5.10.2.jar:5.10.2]
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:31) ~[junit-jupiter-engine-5.10.2.jar:5.10.2]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:106) ~[junit-jupiter-engine-5.10.2.jar:5.10.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.2.jar:1.10.2]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:105) ~[junit-jupiter-engine-5.10.2.jar:5.10.2]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:69) ~[junit-jupiter-engine-5.10.2.jar:5.10.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$2(NodeTestTask.java:123) ~[junit-platform-engine-1.10.2.jar:1.10.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.2.jar:1.10.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:123) ~[junit-platform-engine-1.10.2.jar:1.10.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:90) ~[junit-platform-engine-1.10.2.jar:1.10.2]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.10.2.jar:1.10.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.10.2.jar:1.10.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.2.jar:1.10.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.10.2.jar:1.10.2]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.10.2.jar:1.10.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.10.2.jar:1.10.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.2.jar:1.10.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.10.2.jar:1.10.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.10.2.jar:1.10.2]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.10.2.jar:1.10.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.10.2.jar:1.10.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.2.jar:1.10.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.10.2.jar:1.10.2]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.10.2.jar:1.10.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.10.2.jar:1.10.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.2.jar:1.10.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.10.2.jar:1.10.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.10.2.jar:1.10.2]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35) ~[junit-platform-engine-1.10.2.jar:1.10.2]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57) ~[junit-platform-engine-1.10.2.jar:1.10.2]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54) ~[junit-platform-engine-1.10.2.jar:1.10.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198) ~[junit-platform-launcher-1.10.2.jar:1.10.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169) ~[junit-platform-launcher-1.10.2.jar:1.10.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93) ~[junit-platform-launcher-1.10.2.jar:1.10.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58) ~[junit-platform-launcher-1.10.2.jar:1.10.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:141) ~[junit-platform-launcher-1.10.2.jar:1.10.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57) ~[junit-platform-launcher-1.10.2.jar:1.10.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103) ~[junit-platform-launcher-1.10.2.jar:1.10.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85) ~[junit-platform-launcher-1.10.2.jar:1.10.2]
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47) ~[junit-platform-launcher-1.10.2.jar:1.10.2]
+	at org.apache.maven.surefire.junitplatform.LazyLauncher.execute(LazyLauncher.java:56) ~[surefire-junit-platform-3.2.5.jar:3.2.5]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:184) ~[surefire-junit-platform-3.2.5.jar:3.2.5]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:148) ~[surefire-junit-platform-3.2.5.jar:3.2.5]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:122) ~[surefire-junit-platform-3.2.5.jar:3.2.5]
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385) ~[surefire-booter-3.2.5.jar:3.2.5]
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162) ~[surefire-booter-3.2.5.jar:3.2.5]
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507) ~[surefire-booter-3.2.5.jar:3.2.5]
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495) ~[surefire-booter-3.2.5.jar:3.2.5]
+Caused by: java.util.concurrent.TimeoutException: null
+	at java.base/java.util.concurrent.CompletableFuture.timedGet(CompletableFuture.java:1960) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2095) ~[na:na]
+	at org.apache.kafka.common.internals.KafkaFutureImpl.get(KafkaFutureImpl.java:180) ~[kafka-clients-3.7.0.jar:na]
+	at org.springframework.kafka.core.KafkaAdmin.lambda$checkPartitions$13(KafkaAdmin.java:521) ~[spring-kafka-3.2.0.jar:3.2.0]
+	... 93 common frames omitted
+
+2026-08-17T23:41:42.312+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:42.312+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:43.332+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:43.332+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:44.365+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:44.365+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:45.287+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:45.288+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:46.209+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:46.209+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:47.221+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:47.222+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:48.235+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:48.235+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:49.251+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:49.254+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:50.167+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:50.168+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:51.182+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Node -1 disconnected.
+2026-08-17T23:41:51.182+05:30  WARN 7997 --- [user-authentication] [ication-admin-0] org.apache.kafka.clients.NetworkClient   : [AdminClient clientId=user-authentication-admin-0] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-08-17T23:41:51.681+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] o.a.k.clients.admin.KafkaAdminClient     : [AdminClient clientId=user-authentication-admin-0] Forcing a hard I/O thread shutdown. Requests in progress will be aborted.
+2026-08-17T23:41:51.687+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] o.a.kafka.common.utils.AppInfoParser     : App info kafka.admin.client for user-authentication-admin-0 unregistered
+2026-08-17T23:41:51.688+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] o.a.k.c.a.i.AdminMetadataManager         : [AdminClient clientId=user-authentication-admin-0] Metadata update failed
+
+org.apache.kafka.common.errors.TimeoutException: The AdminClient thread has exited. Call: fetchMetadata
+
+2026-08-17T23:41:51.689+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] o.a.k.clients.admin.KafkaAdminClient     : [AdminClient clientId=user-authentication-admin-0] Timed out 2 remaining operation(s) during close.
+2026-08-17T23:41:51.691+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] o.apache.kafka.common.metrics.Metrics    : Metrics scheduler closed
+2026-08-17T23:41:51.692+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.metrics.JmxReporter
+2026-08-17T23:41:51.692+05:30  INFO 7997 --- [user-authentication] [ication-admin-0] o.apache.kafka.common.metrics.Metrics    : Metrics reporters closed
+2026-08-17T23:41:51.715+05:30  INFO 7997 --- [user-authentication] [           main] c.r.a.PlatformApplicationTests           : Started PlatformApplicationTests in 91.933 seconds (process running for 96.447)
+2026-08-17T23:41:52.040+05:30 DEBUG 7997 --- [user-authentication] [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2026-08-17T23:41:52.040+05:30 DEBUG 7997 --- [user-authentication] [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+WARNING: A Java agent has been loaded dynamically (/var/lib/jenkins/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.16/byte-buddy-agent-1.14.16.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 95.68 s -- in com.rideHub.authService.[1mPlatformApplicationTests[m
+[[1;34mINFO[m] Running com.rideHub.authService.service.impl.[1mUserServiceImplTest[m
+[[1;34mINFO[m] Running com.rideHub.authService.service.impl.[1mUserServiceImplTest$UserProfileTests[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.522 s -- in com.rideHub.authService.service.impl.[1mUserServiceImplTest$UserProfileTests[m
+[[1;34mINFO[m] Running com.rideHub.authService.service.impl.[1mUserServiceImplTest$UserLoginTests[m
+2026-08-17T23:41:56.460+05:30  INFO 7997 --- [user-authentication] [           main] c.r.a.service.impl.UserServiceImpl       : Login attempt for email: sahasramuthyala04@gmail.com
+2026-08-17T23:41:56.467+05:30  INFO 7997 --- [user-authentication] [           main] c.r.a.service.impl.UserServiceImpl       : User 'sahasramuthyala04@gmail.com' authenticated successfully.
+2026-08-17T23:41:56.528+05:30  INFO 7997 --- [user-authentication] [           main] c.r.a.service.impl.UserServiceImpl       : Login attempt for email: sahasramuthyala04@gmail.com
+2026-08-17T23:41:56.529+05:30  WARN 7997 --- [user-authentication] [           main] c.r.a.service.impl.UserServiceImpl       : Failed login attempt for email: sahasramuthyala04@gmail.com
+2026-08-17T23:41:56.541+05:30  INFO 7997 --- [user-authentication] [           main] c.r.a.service.impl.UserServiceImpl       : Login attempt for email: sahasramuthyala04@gmail.com
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.116 s -- in com.rideHub.authService.service.impl.[1mUserServiceImplTest$UserLoginTests[m
+[[1;34mINFO[m] Running com.rideHub.authService.service.impl.[1mUserServiceImplTest$RegisterTest[m
+2026-08-17T23:41:56.696+05:30  INFO 7997 --- [user-authentication] [           main] c.r.a.service.impl.UserServiceImpl       : Register request received for email: sahasramuthyala04@gmail.com
+2026-08-17T23:41:56.811+05:30  INFO 7997 --- [user-authentication] [           main] c.r.a.service.impl.UserServiceImpl       : Register request received for email: sahasramuthyala04@gmail.com
+2026-08-17T23:41:56.819+05:30  INFO 7997 --- [user-authentication] [           main] c.r.a.service.impl.UserServiceImpl       : User registered successfully with ID: 1
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.288 s -- in com.rideHub.authService.service.impl.[1mUserServiceImplTest$RegisterTest[m
+[[1;34mINFO[m] [1mTests run: [0;1m0[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.971 s -- in com.rideHub.authService.service.impl.[1mUserServiceImplTest[m
+[[1;34mINFO[m] Running com.rideHub.authService.security.service.[1mCustomUserDetailsServiceTest[m
+2026-08-17T23:41:57.133+05:30  INFO 7997 --- [user-authentication] [           main] c.r.a.s.s.CustomUserDetailsService       : Loading user: sahasramuthyala04@gmail.com
+2026-08-17T23:41:57.200+05:30  INFO 7997 --- [user-authentication] [           main] c.r.a.s.s.CustomUserDetailsService       : Loading user: sahasramuthyala04@gmail.com
+2026-08-17T23:41:57.204+05:30  INFO 7997 --- [user-authentication] [           main] c.r.a.s.s.CustomUserDetailsService       : User loaded successfully: sahasramuthyala04@gmail.com
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.321 s -- in com.rideHub.authService.security.service.[1mCustomUserDetailsServiceTest[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] Results:
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1;32mTests run: 10, Failures: 0, Errors: 0, Skipped: 0[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;32mBUILD SUCCESS[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  02:01 min
+[[1;34mINFO[m] Finished at: 2026-08-17T23:41:58+05:30
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] dir
+Running in /var/lib/jenkins/workspace/ridehub-auth-service/RIDEHUB USER AUTHENTICATION
+[Pipeline] {
+[Pipeline] sh
++ mvn package -DskipTests
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m----------------------< [0;36mcom.rideHub:authService[0;1m >-----------------------[m
+[[1;34mINFO[m] [1mBuilding RideHub Platform 0.0.1-SNAPSHOT[m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:resources[m [1m(default-resources)[m @ [36mauthService[0;1m ---[m
+[[1;34mINFO[m] Copying 1 resource from src/main/resources to target/classes
+[[1;34mINFO[m] Copying 0 resource from src/main/resources to target/classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.13.0:compile[m [1m(default-compile)[m @ [36mauthService[0;1m ---[m
+[[1;34mINFO[m] Nothing to compile - all classes are up to date.
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:testResources[m [1m(default-testResources)[m @ [36mauthService[0;1m ---[m
+[[1;34mINFO[m] skip non existing resourceDirectory /var/lib/jenkins/workspace/ridehub-auth-service/RIDEHUB USER AUTHENTICATION/src/test/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.13.0:testCompile[m [1m(default-testCompile)[m @ [36mauthService[0;1m ---[m
+[[1;34mINFO[m] Nothing to compile - all classes are up to date.
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-surefire-plugin:3.2.5:test[m [1m(default-test)[m @ [36mauthService[0;1m ---[m
+[[1;34mINFO[m] Tests are skipped.
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-jar-plugin:3.4.1:jar[m [1m(default-jar)[m @ [36mauthService[0;1m ---[m
+[[1;34mINFO[m] Building jar: /var/lib/jenkins/workspace/ridehub-auth-service/RIDEHUB USER AUTHENTICATION/target/authService-0.0.1-SNAPSHOT.jar
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mspring-boot-maven-plugin:3.3.0:repackage[m [1m(repackage)[m @ [36mauthService[0;1m ---[m
+[[1;34mINFO[m] Replacing main artifact /var/lib/jenkins/workspace/ridehub-auth-service/RIDEHUB USER AUTHENTICATION/target/authService-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[[1;34mINFO[m] The original artifact has been renamed to /var/lib/jenkins/workspace/ridehub-auth-service/RIDEHUB USER AUTHENTICATION/target/authService-0.0.1-SNAPSHOT.jar.original
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;32mBUILD SUCCESS[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  14.067 s
+[[1;34mINFO[m] Finished at: 2026-08-17T23:42:19+05:30
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Docker Build)
+[Pipeline] dir
+Running in /var/lib/jenkins/workspace/ridehub-auth-service/RIDEHUB USER AUTHENTICATION
+[Pipeline] {
+[Pipeline] sh
++ docker build -t ridehub-auth-service:7 .
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  79.07MB
+
+Step 1/5 : FROM eclipse-temurin:17-jre
+17-jre: Pulling from library/eclipse-temurin
+26df7c06c61d: Pulling fs layer
+617772c7d19b: Pulling fs layer
+a7fb98a8eddd: Pulling fs layer
+5900e0e4b3f7: Pulling fs layer
+dd424020a6d5: Pulling fs layer
+08758b58d308: Pulling fs layer
+08758b58d308: Download complete
+26df7c06c61d: Download complete
+a7fb98a8eddd: Download complete
+2bc0df5bd150: Download complete
+d15bfca7dfde: Download complete
+5900e0e4b3f7: Download complete
+617772c7d19b: Download complete
+dd424020a6d5: Download complete
+617772c7d19b: Pull complete
+a7fb98a8eddd: Pull complete
+5900e0e4b3f7: Pull complete
+dd424020a6d5: Pull complete
+08758b58d308: Pull complete
+26df7c06c61d: Pull complete
+Digest: sha256:56cd3dfd4e99fed05a153a717847950a31b83621b62ef25a09f75bc4e5e8b67e
+Status: Downloaded newer image for eclipse-temurin:17-jre
+ ---> 56cd3dfd4e99
+Step 2/5 : WORKDIR /app
+ ---> Running in 2d2307df4eb5
+ ---> Removed intermediate container 2d2307df4eb5
+ ---> 6238a9021258
+Step 3/5 : COPY target/*.jar app.jar
+ ---> 501913ab7d26
+Step 4/5 : EXPOSE 8080
+ ---> Running in d0d4359dde81
+ ---> Removed intermediate container d0d4359dde81
+ ---> 397d9faa999d
+Step 5/5 : ENTRYPOINT ["java", "-jar", "app.jar"]
+ ---> Running in 76daea3edadd
+ ---> Removed intermediate container 76daea3edadd
+ ---> d4237f8917bc
+Successfully built d4237f8917bc
+Successfully tagged ridehub-auth-service:7
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo
+Tests and build completed successfully!
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
+
+https://github.com/Sahasragoud/GitDemo/blob/main/pbafile
+
 STEP 4 ✅
 Jenkins → Checkout → Maven build
 
